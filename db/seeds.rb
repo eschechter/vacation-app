@@ -26,34 +26,50 @@ require "faker"
 #   Vacation.create(start_date: start, end_date: endy, user: User.all.sample)
 # end
 
-200.times do |i|
-  vacay = Vacation.all.sample
-  cur_hotel = Hotel.all.sample
+# 200.times do |i|
+#   vacay = Vacation.all.sample
+#   cur_hotel = Hotel.all.sample
 
-  other_stays = vacay.hotel_stays
+#   other_stays = vacay.hotel_stays
 
-  while true
-    start_of_stay = Faker::Date.between(vacay.start_date, vacay.end_date)
-    potential_end_of_stay = [start_of_stay + 8, vacay.end_date].min
-    end_of_stay = Faker::Date.between(start_of_stay + 1, potential_end_of_stay)
-    our_range = start_of_stay..end_of_stay
+#   while true
+#     start_of_stay = Faker::Date.between(vacay.start_date, vacay.end_date)
+#     potential_end_of_stay = [start_of_stay + 8, vacay.end_date].min
+#     end_of_stay = Faker::Date.between(start_of_stay + 1, potential_end_of_stay)
+#     our_range = start_of_stay..end_of_stay
 
-    other_stays_ranges = other_stays.map do |stay|
-      stay.check_in_time..stay.check_out_time
-    end
+#     other_stays_ranges = other_stays.map do |stay|
+#       stay.check_in_time..stay.check_out_time
+#     end
 
-    overlapping = false
+#     overlapping = false
 
-    other_stays_ranges.each do |date_range|
-      if our_range.cover?(date_range.first) || our_range.cover?(date_range.last)
-        overlapping = true
-      end
-    end
-    if !overlapping
-      break
-    end
-  end
+#     other_stays_ranges.each do |date_range|
+#       if our_range.cover?(date_range.first) || our_range.cover?(date_range.last)
+#         overlapping = true
+#       end
+#     end
+#     if !overlapping
+#       break
+#     end
+#   end
 
-  HotelStay.create(check_in_time: start_of_stay, check_out_time: end_of_stay, vacation: vacay, hotel: cur_hotel)
-  puts i
+#   HotelStay.create(check_in_time: start_of_stay, check_out_time: end_of_stay, vacation: vacay, hotel: cur_hotel)
+#   puts i
+# end
+
+
+Flight.create!(airline: "American Airlines", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "American Airlines", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Delta", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Delta", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Southwest", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Southwest", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "JetBlue", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "JetBlue", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Alaska Airlines", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "United", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+
+10.times do 
+    VacationFlight.create!(vacation: Vacation.all.sample, flight: Flight.all.sample)
 end
