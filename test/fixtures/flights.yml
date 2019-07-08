@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  airline: MyString
+  start_time: 2019-07-08 10:31:52
+  end_time: 2019-07-08 10:31:52
+  origin: one
+  destination: one
+
+two:
+  airline: MyString
+  start_time: 2019-07-08 10:31:52
+  end_time: 2019-07-08 10:31:52
+  origin: two
+  destination: two
