@@ -58,7 +58,23 @@ require "faker"
 #   puts i
 # end
 
+Flight.create!(airline: "American Airlines", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "American Airlines", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Delta", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Delta", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Southwest", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Southwest", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "JetBlue", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "JetBlue", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "Alaska Airlines", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+Flight.create!(airline: "United", start_time: Faker::Time.forward(60, :all), end_time: Faker::Time.forward(75, :all), origin: City.all.sample, destination: City.all.sample)
+
+10.times do 
+    VacationFlight.create!(vacation: Vacation.all.sample, flight: Flight.all.sample)
+end
+
 User.all.each do |user|
   user.email = Faker::Internet.email
   user.save
 end
+
