@@ -22,11 +22,27 @@ class Flight < ApplicationRecord
     end
   end
 
+  def flight_within_vacation?(vacation)
+    start_time.to_date >= vacation.start_date && end_time.to_date <= vacation.end_date
+  end
+
+  def flight_is_later_than_last_flights_departure?(vacation)
+    vacation.last_flight.nil? || start_time >= vacation.last_flight.end_time
+  end
+
+  def origin_is_same_as_last_destination?(vacation)
+    vacation.last_flight.nil? || origin_id == vacation.last_flight.destination_id
+  end
+
+  def does_not_interfere_with_hotel_stay?(vacation)
+    vacation.last_hotel_stayed_at.nil? || vacation.last_hotel_stayed_at.check_out_time < flight.start_time
+  end
+
   def can_be_added_to_vacation?(vacation)
-    (flight.start_time.to_date >= vacation.start_date && flight.end_time.to_date <= vacation.end_date) &&
-    (vacation.last_flight.nil? || flight.start_time >= vacation.last_flight.end_time) &&
-    (vacation.last_flight.nil? || flight.origin_id == vacation.last_flight.destination_id) &&
-    (vacation.last_hotel_stayed_at.nil? || vacation.last_hotel_stayed_at.check_out_time < flight.start_time)
+    flight_within_vacation?(vacation) &&
+      flight_is_later_than_last_flights_departure?(vacation) &&
+      origin_is_same_as_last_destination?(vacation) &&
+      does_not_interfere_with_hotel_stay?(vacation)
   end
 
   def self.search(orig_id, dest_id, start)

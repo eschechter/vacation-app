@@ -14,7 +14,7 @@ Flight.destroy_all
 Hotel.destroy_all
 City.destroy_all
 
-20.times do
+10.times do
   City.create(name: Faker::Address.city, country: Faker::Address.country)
 end
 
@@ -22,32 +22,30 @@ end
   Hotel.create(name: Faker::Dessert.unique.variety, city: City.all.sample)
 end
 
-5.times do
-  start = Faker::Date.forward(60)
-  endy = Faker::Date.between(start, start + 15)
+20.times do
+  start = Faker::Date.forward(10)
+  endy = Faker::Date.between(start, start + 15.days)
   Vacation.create(start_date: start, end_date: endy, user: User.all.sample)
 end
 
-Flight.destroy_all
-
-10.times do
-  start = Faker::Time.forward(60)
+40.times do
+  start = Faker::Time.forward(10)
   endy = rand(start + 2.hours..start + 10.hours)
   orig = City.all.sample
   dest = City.where.not(id: orig.id).sample
   Flight.create!(airline: "American Airlines", start_time: start, end_time: endy, origin: orig, destination: dest)
 end
 
-10.times do
-  start = Faker::Time.forward(60)
+40.times do
+  start = Faker::Time.forward(10)
   endy = rand(start + 2.hours..start + 10.hours)
   orig = City.all.sample
   dest = City.where.not(id: orig.id).sample
   Flight.create!(airline: "Delta", start_time: start, end_time: endy, origin: orig, destination: dest)
 end
 
-10.times do
-  start = Faker::Time.forward(60)
+40.times do
+  start = Faker::Time.forward(10)
   endy = rand(start + 2.hours..start + 10.hours)
   orig = City.all.sample
   dest = City.where.not(id: orig.id).sample
