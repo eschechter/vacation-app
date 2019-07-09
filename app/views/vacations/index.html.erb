@@ -1,0 +1,7 @@
+<ol>
+  <% @vacations.each do |vac| %>
+    <li>
+      <%= link_to "Vacation starting on #{vac.start_date.strftime('%m/%d/%Y')} and ending on #{vac.end_date.strftime('%m/%d/%Y')}", vacation_path(vac)%>
+    </li>
+  <% end %>
+</ol>
