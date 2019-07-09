@@ -12,9 +12,9 @@ class VacationFlight < ApplicationRecord
     end
   end
 
-  def flight_contained_in_vacation?
-    flight.start_time.to_date >= vacation.start_date && flight.end_time.to_date <= vacation.end_date
-  end
+  # def flight_contained_in_vacation?
+  #   flight.start_time.to_date >= vacation.start_date && flight.end_time.to_date <= vacation.end_date
+  # end
 
   def flight_will_be_most_recent
     if vacation.last_flight && flight.start_time < vacation.last_flight.end_time
@@ -22,9 +22,9 @@ class VacationFlight < ApplicationRecord
     end
   end
 
-  def flight_will_be_most_recent?
-    vacation.last_flight.nil? || flight.start_time >= vacation.last_flight.end_time
-  end
+  # def flight_will_be_most_recent?
+  #   vacation.last_flight.nil? || flight.start_time >= vacation.last_flight.end_time
+  # end
 
   def origin_matches_last_destination
     if vacation.last_flight && flight.origin_id != vacation.last_flight.destination_id
@@ -32,11 +32,22 @@ class VacationFlight < ApplicationRecord
     end
   end
 
-  def origin_matches_last_destination?
-    vacation.last_flight.nil? || flight.origin_id == vacation.last_flight.destination_id
-  end
+  # def origin_matches_last_destination?
+  #   vacation.last_flight.nil? || flight.origin_id == vacation.last_flight.destination_id
+  # end
 
-  def can_add?
-    flight_contained_in_vacation? && flight_will_be_most_recent? && origin_matches_last_destination?
-  end
+  # def take_off_does_not_interfere_with_hotel_stay?
+  #   if vacation.last_hotel_stayed_at.nil?
+  #     return true
+  #   end
+
+  #   vacation.last_hotel_stayed_at.check_out_time < flight.start_time
+  # end
+
+  # def can_add?
+  #   flight_contained_in_vacation? &&
+  #     flight_will_be_most_recent? &&
+  #     origin_matches_last_destination? &&
+  #     take_off_does_not_interfere_with_hotel_stay?
+  # end
 end
