@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def create
     session[:user_id] = User.create(user_params).id
-    redirect_to home_path
+    redirect_to vacations_path
   end
 
   def homepage
