@@ -1,0 +1,17 @@
+<h3>Showing flights from <% @searched_flights.each do |flight| %>
+    <%= flight.origin.name %> to <%= flight.destination.name %>
+<% end %>
+</h3>
+
+<ol>
+    <li><br><ul>
+    <% @searched_flights.each do |flight| %>
+        <li>Airline: <%= flight.airline %></li>
+        <li>Departure Date: <%= flight.start_time.strftime("%m/%d/%Y") %></li>
+        <li>Departure Time: <%= flight.start_time.strftime("%I:%M%p") %></li>
+        <li>Landing Date: <%= flight.end_time.strftime("%m/%d/%Y") %></li>
+        <li>Landing Time: <%= flight.end_time.strftime("%I:%M%p") %></li>
+    <% end %>
+    </li></ul>
+
+<ol>

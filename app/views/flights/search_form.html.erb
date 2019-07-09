@@ -1,0 +1,11 @@
+<h1>Search for a new flight!</h1>
+
+<%= form_tag("/flights/search", method: :get) do %>
+  <%= label_tag "Origin location" %>
+  <%= collection_select :flight, :origin_id, @cities, :id, :name, prompt: "Please select origin city" %><br>
+  <%= label_tag "Destination location" %>
+  <%= collection_select :flight, :destination_id, @cities, :id, :name, prompt: "Please select origin city" %><br>
+  <%= label_tag "Choose time" %>
+  <%= datetime_select("flight", "start_time") %><br>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>

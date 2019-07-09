@@ -1,0 +1,9 @@
+<h1>Your Flight</h1>
+
+<ul>
+    <li>Airline: <%= @flight.airline%></li>
+    <li>Departure: <%= @flight.start_time.to_formatted_s(:long_ordinal)%></li>
+    <li>Arrival: <%= @flight.end_time.to_formatted_s(:long_ordinal)%></li>
+    <li>Flying from: <%= @flight.origin.name%></li>
+    <li>Flying to: <%= @flight.destination.name%></li>
+</ul>
