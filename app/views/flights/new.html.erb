@@ -1,0 +1,9 @@
+<h1>Book a New Flight!</h1>
+
+<%= form_for(@flight) do |f| %>
+    <%= f.label "Select Origin City" %>
+    <%= f.collection_select :origin, City.all, :id, :name, :prompt => "Please select city" %><br>
+    <%= f.label "Select Destination City" %>
+    <%= f.collection_select :destination, City.all.without(:origin), :id, :name, :prompt => "Please select city" %>
+    <%= f.submit "Book the flight!" %>
+<% end %>
