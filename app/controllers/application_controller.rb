@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    user
+    !user.nil?
   end
 
   def authorized
