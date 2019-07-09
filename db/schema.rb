@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_194401) do
+ActiveRecord::Schema.define(version: 2019_07_09_134219) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2019_07_08_194401) do
   end
 
   create_table "hotel_stays", force: :cascade do |t|
-    t.date "check_in_time"
-    t.date "check_out_time"
+    t.datetime "check_in_time"
+    t.datetime "check_out_time"
     t.integer "hotel_id"
     t.integer "vacation_id"
     t.datetime "created_at", null: false
