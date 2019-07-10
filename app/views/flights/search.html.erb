@@ -10,7 +10,7 @@
           <li>Departure Time: <%= flight.start_time.strftime("%I:%M%p") %></li>
           <li>Landing Date: <%= flight.end_time.strftime("%m/%d/%Y") %></li>
           <li>Landing Time: <%= flight.end_time.strftime("%I:%M%p") %></li>
-          <%= button_to "Add this flight", "/vacations/#{@vacation.id}/#{flight.id}" %>
+          <%= button_to "Add this flight", controller: "vacation_flights", action: "create", params: {vacation_flight: { flight_id: flight.id, vacation_id: @vacation.id }} %>
         </ul>
       </li>
     <% end %>
