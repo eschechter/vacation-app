@@ -1,17 +1,21 @@
-<h3>Showing flights from <% @searched_flights.each do |flight| %>
-    <%= flight.origin.name %> to <%= flight.destination.name %>
-<% end %>
-</h3>
-
-<ol>
-    <li><br><ul>
+<% if !@searched_flights.empty? %>
+  <h3>Showing flights from <%= @searched_flights[0].origin.name%> to <%= @searched_flights[0].destination.name %>
+  </h3>
+  <ol>
     <% @searched_flights.each do |flight| %>
-        <li>Airline: <%= flight.airline %></li>
-        <li>Departure Date: <%= flight.start_time.strftime("%m/%d/%Y") %></li>
-        <li>Departure Time: <%= flight.start_time.strftime("%I:%M%p") %></li>
-        <li>Landing Date: <%= flight.end_time.strftime("%m/%d/%Y") %></li>
-        <li>Landing Time: <%= flight.end_time.strftime("%I:%M%p") %></li>
+      <li><br>
+        <ul>
+          <li>Airline: <%= flight.airline %></li>
+          <li>Departure Date: <%= flight.start_time.strftime("%m/%d/%Y") %></li>
+          <li>Departure Time: <%= flight.start_time.strftime("%I:%M%p") %></li>
+          <li>Landing Date: <%= flight.end_time.strftime("%m/%d/%Y") %></li>
+          <li>Landing Time: <%= flight.end_time.strftime("%I:%M%p") %></li>
+          <%= button_to "Add this flight", "/vacations/#{@vacation.id}/#{flight.id}" %>
+        </ul>
+      </li>
     <% end %>
-    </li></ul>
-
-<ol>
+  </ol>
+<% else%>
+  <h2>No flights matched your search.</h2>
+  <%= link_to "Go back to your vacation's page.", vacation_path(@vacation) %>
+<% end%>

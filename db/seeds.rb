@@ -9,43 +9,61 @@ require "faker"
 #   Character.create(name: 'Luke', movie: movies.first)
 
 HotelStay.destroy_all
+VacationFlight.destroy_all
 Vacation.destroy_all
 Flight.destroy_all
 Hotel.destroy_all
 City.destroy_all
 
-10.times do
-  City.create(name: Faker::Address.city, country: Faker::Address.country)
+city_list = [
+  "New York, New York",
+  "Los Angeles, California",
+  "Chicago, Illinois",
+  "Houston, Texas",
+  "Phoenix, Arizona",
+  "Philadelphia, Pennsylvania",
+  "San Antonio, Texas",
+  "San Diego, California",
+  "Dallas, Texas",
+  "San Jose, California",
+  "Austin, Texas",
+  "Jacksonville, Florida",
+  "Fort Worth, Texas",
+  "Columbus, Ohio",
+  "San Francisco, California",
+  "Charlotte, North Carolina",
+  "Indianapolis, Indiana",
+  "Seattle, Washington",
+]
+
+city_list.each do |city_state_string|
+  city_name = city_state_string.split(", ")[0]
+  state_name = city_state_string.split(", ")[1]
+  City.create(name: city_name, state: state_name)
 end
 
-21.times do
-  Hotel.create(name: Faker::Dessert.unique.variety, city: City.all.sample)
+120.times do
+  Hotel.create(name: "The #{Faker::Name.unique.first_name}", city: City.all.sample)
 end
 
-20.times do
-  start = Faker::Date.forward(10)
-  endy = Faker::Date.between(start, start + 15.days)
-  Vacation.create(start_date: start, end_date: endy, user: User.all.sample)
-end
-
-40.times do
-  start = Faker::Time.forward(10)
+50_000.times do
+  start = Faker::Time.forward(150)
   endy = rand(start + 2.hours..start + 10.hours)
   orig = City.all.sample
   dest = City.where.not(id: orig.id).sample
   Flight.create!(airline: "American Airlines", start_time: start, end_time: endy, origin: orig, destination: dest)
 end
 
-40.times do
-  start = Faker::Time.forward(10)
+50_000.times do
+  start = Faker::Time.forward(150)
   endy = rand(start + 2.hours..start + 10.hours)
   orig = City.all.sample
   dest = City.where.not(id: orig.id).sample
   Flight.create!(airline: "Delta", start_time: start, end_time: endy, origin: orig, destination: dest)
 end
 
-40.times do
-  start = Faker::Time.forward(10)
+50_000.times do
+  start = Faker::Time.forward(150)
   endy = rand(start + 2.hours..start + 10.hours)
   orig = City.all.sample
   dest = City.where.not(id: orig.id).sample
