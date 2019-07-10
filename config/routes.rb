@@ -11,13 +11,19 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new", as: "login"
   post "/sessions", to: "sessions#create"
   delete "/sessions", to: "sessions#destroy", as: "logout"
-  
+
   # Flight route
-  get "/flights/search-form", to: "flights#search_form"
-  get "/flights/search", to: "flights#search"
-  resources :flights
-  
+
+  get "/flights/search/:id", to: "flights#search", as: "flight_search"
+
+  # get "/flights/search-form", to: "flights#search_form"
+
   # Vacation routes
 
-  resources :vacations, only: [:index, :show]
+  get "/vacations", to: "vacations#index", as: "vacations"
+  get "/vacations/new", to: "vacations#new", as: "new_vacation"
+  get "/vacations/:id", to: "vacations#show", as: "vacation"
+
+  post "/vacations", to: "vacations#create"
+  post "/vacations/:vacation_id/:flight_id", to: "vacations#add_flight"
 end
