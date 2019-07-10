@@ -11,6 +11,12 @@ class VacationsController < ApplicationController
     end
     @cities = City.all
     @vacation = Vacation.find(params[:id])
+    @most_recent_flight = @vacation.last_vacation_flight
+    if @vacation.end_date
+      render :show_final
+    else
+      render :show
+    end
   end
 
   def new
@@ -23,10 +29,21 @@ class VacationsController < ApplicationController
     redirect_to vacation_path(@vac)
   end
 
-  def add_flight
-    VacationFlight.create(vacation_id: params[:vacation_id], flight_id: params[:flight_id])
-    redirect_to vacation_path(params[:vacation_id])
+  def finalize
+    @vacation = Vacation.find(params[:id])
+    @vacation.update(end_date: @vacation.last_flight.end_time.to_date)
+    redirect_to vacation_path(@vacation)
   end
+
+  # def add_flight
+  #   VacationFlight.create(vacation_id: params[:vacation_id], flight_id: params[:flight_id])
+  #   redirect_to vacation_path(params[:vacation_id])
+  # end
+
+  # def add_hotel
+  #   HotelStay.create(vacation_id: params[:vacation_id], flight_id: params[:flight_id])
+  #   redirect_to vacation_path(params[:vacation_id])
+  # end
 
   private
 

@@ -16,14 +16,18 @@ Rails.application.routes.draw do
 
   get "/flights/search/:id", to: "flights#search", as: "flight_search"
 
-  # get "/flights/search-form", to: "flights#search_form"
-
   # Vacation routes
 
   get "/vacations", to: "vacations#index", as: "vacations"
   get "/vacations/new", to: "vacations#new", as: "new_vacation"
   get "/vacations/:id", to: "vacations#show", as: "vacation"
-
   post "/vacations", to: "vacations#create"
+  post "/vacations/finalize/:id", to: "vacations#finalize", as: "finalize_vacation"
   post "/vacations/:vacation_id/:flight_id", to: "vacations#add_flight"
+
+  # VacationFlights routes
+
+  resources :vacation_flights, only: [:create, :destroy]
+
+  resources :hotel_stays, only: [:create, :destroy]
 end

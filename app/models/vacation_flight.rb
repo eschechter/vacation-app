@@ -7,7 +7,7 @@ class VacationFlight < ApplicationRecord
   validate :origin_matches_last_destination
 
   def flight_contained_in_vacation
-    if flight.start_time.to_date < vacation.start_date || flight.end_time.to_date > vacation.end_date
+    if flight.start_time.to_date < vacation.start_date
       errors.add(:flight, "must fit in the vacation's dates.")
     end
   end

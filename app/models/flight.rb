@@ -23,7 +23,7 @@ class Flight < ApplicationRecord
   end
 
   def flight_within_vacation?(vacation)
-    start_time.to_date >= vacation.start_date && end_time.to_date <= vacation.end_date
+    start_time.to_date >= vacation.start_date
   end
 
   def flight_is_later_than_last_flights_departure?(vacation)
@@ -35,7 +35,7 @@ class Flight < ApplicationRecord
   end
 
   def does_not_interfere_with_hotel_stay?(vacation)
-    vacation.last_hotel_stayed_at.nil? || vacation.last_hotel_stayed_at.check_out_time < flight.start_time
+    vacation.last_hotel_stay.nil? || vacation.last_hotel_stay.check_out_time < start_time
   end
 
   def can_be_added_to_vacation?(vacation)
@@ -46,7 +46,7 @@ class Flight < ApplicationRecord
   end
 
   def self.search(orig_id, dest_id, start)
-    start_range = start - 12.hours..start + 12.hours
+    start_range = start - 6.hours..start + 6.hours
     Flight.where(origin_id: orig_id, destination_id: dest_id, start_time: start_range)
   end
 end

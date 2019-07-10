@@ -3,8 +3,6 @@
   <%= f.text_field :name %>
   <%= f.label :start_date %>
   <%= f.date_field :start_date %>
-  <%= f.label :end_date %>
-  <%= f.date_field :end_date %>
   <%= hidden_field_tag "vacation[user_id]", @user_id %>
   <%= f.submit "Make the vacay!" %>
 <% end %>
