@@ -13,19 +13,18 @@ h1 {
 .col-sm {
     border: solid 2px black;
 }
+.button {
+    text-align: center;
+    border: none
+}
+
+
 
 .col-heading {
     text-align: center;
     padding-top: 20px;
 }
 
-#delete-hotel {
-  margin-left: 65%
-}
 
-#delete-flight {
-    margin-right: 65%
-
-}
 
 
