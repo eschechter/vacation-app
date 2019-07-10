@@ -1,64 +1,74 @@
 <h1><%= "#{@vacation.name} starting on #{@vacation.start_date.strftime('%m/%d/%Y')}"%></h1>
 <%= render "show-helper" %>
 <br>
-<% if !@vacation.need_to_book_hotel? %>
-  <div class="container">
-    <div class="row">
-      <div class="col-d">
+<div class="container">
+  <div class="row">
+    <% if !@vacation.need_to_book_hotel? %>
+      <div class="col-sm button">
+        <%= " " %>
       </div>
-      <div class="col-d">
+      <div class="col-1 button">
+        <%= " " %>
       </div>
-      <div class="col-d">
-        <%= button_to "Delete the most recent hotel", @vacation.hotel_stays.max_by(&:check_out_time), {method: :delete, id: "delete-hotel"} %>
-      </div>
-      <br>
-      <div id="search">
-        <h2>Search for your next flight!</h2>
-        <%= form_tag("/flights/search/#{@vacation.id}", method: :get) do %>
-          <%= label_tag "Origin location:" %>
-          <% if !@vacation.cur_city.nil? %>
-            <%= @vacation.cur_city.name %>
-            <%= hidden_field_tag "flight[origin_id]", @vacation.cur_city.id  %>
-          <% else %>
-            <%= collection_select :flight, :origin_id, @cities, :id, :name, prompt: "Please select origin city" %>
-          <% end %>
-          <%= label_tag "Destination location" %>
-          <%= collection_select :flight, :destination_id, @cities, :id, :name, prompt: "Please select destination city" %>
-          <%= label_tag "Choose time" %>
-          <%= datetime_select("flight", "start_time") %>
-          <%= submit_tag 'Search', name: nil %>
+      <div class="col-sm button">
+        <% if !@vacation.hotels.empty? %>
+          <%= button_to "Delete the most recent hotel", @vacation.hotel_stays.max_by(&:check_out_time), {method: :delete, id: "delete-hotel"} %>
+          <br>
+           <br>
+           <br>
         <% end %>
       </div>
-      <% if !@vacation.hotels.empty? %>
-      <% end %>
+      <br>
+      <nav class = "navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+        <a class= "navbar-brand">Search for your next flight!</a>
+        <%= form_tag "/flights/search/#{@vacation.id}", class: "form-inline" do %>
+          <label class = "my-1 mr-2">Origin:</label>
+          <% if !@vacation.cur_city.nil? %>
+            <strong><%= @vacation.cur_city.name %></strong>
+            &ensp;
+            <%= hidden_field_tag "flight[origin_id]", @vacation.cur_city.id  %>
+          <% else %>
+            <%= collection_select :flight, :origin_id, @cities, :id, :name, {prompt: "Please select origin"}, {class: "form-control mr-sm-2"} %>
+          <% end %>
+          <label class = "my-1 mr-2"> Destination:</label>
+          <%= collection_select :flight, :destination_id, @cities, :id, :name, {prompt: "Please select destination"}, {class: "form-control mr-sm-2"} %>
+          <label class = "my-1 mr-2" >Approx. Departure:</label>
+          <%= datetime_field_tag "flight", "start_time", class: "form-control mr-sm-2 datetime-local"%>
+          <%= submit_tag 'Search', class: "btn btn-primary" %>
+        <% end %>
+      </nav>
     <% else %>
-      <div class="col-d">
-      </div>
-      <div class="col-d">
-      </div>
-      <div class="col-d">
+      <div class="col-sm button">
         <%= button_to "Delete the most recent flight", @most_recent_flight, {method: :delete, id: "delete-flight"} %>
+        <br>
+         <br>
+         <br>
+      </div>
+      <div class="col-1 button">
+        <%= " " %>
+      </div>
+      <div class="col-sm button">
+        <%= " " %>
       </div>
       <br>
     </div>
   </div>
-  <div id="search">
-    <h2>Add a hotel to your trip!</h2>
-    <%= form_for(HotelStay.new) do |f| %>
-      <%= f.label :hotel %>
+  <nav class = "navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+    <a class= "navbar-brand"> Add a hotel!</a>
+    <%= form_for HotelStay.new, html: {class: "form-inline"}  do |f| %>
       <% hotel_list = Hotel.all.select do |hotel| %>
         <% hotel.city == @vacation.cur_city %>
       <% end%>
-      <%= f.collection_select :hotel_id, hotel_list, :id, :name, prompt: "Pick a hotel" %>
-      <%= f.label :check_in_time %>
-      <%= f.datetime_select :check_in_time %>
-      <%= f.label :check_out_time %>
-      <%= f.datetime_select :check_out_time %> <
+      <%= f.collection_select :hotel_id, hotel_list, :id, :name, {prompt: "Pick a hotel"}, {class: "form-control mr-sm-2"} %>
+      <label class = "my-1 mr-2">Check in time:</label>
+      <%= f.datetime_field :check_in_time, class: "form-control mr-sm-2 datetime-local" %>
+      <label class = "my-1 mr-2">Check out time:</label>
+      <%= f.datetime_field :check_out_time, class: "form-control mr-sm-2 datetime-local"%>
       <%= f.hidden_field :vacation_id, value: @vacation.id %>
-      <%= f.submit "Book a hotel" %>
+      <%= f.submit "Book a hotel", class: "btn btn-primary"%>
     <% end %>
-  </div>
-      <% end %>
-      <% if @vacation.first_origin == @vacation.cur_city && !@vacation.flights.empty? %>
-        <%= button_to "Finalize trip", finalize_vacation_path(@vacation)%>
-      <% end %>
+  </nav>
+<% end %>
+<% if @vacation.first_origin == @vacation.cur_city && !@vacation.flights.empty? %>
+  <%= button_to "Finalize trip", finalize_vacation_path(@vacation)%>
+<% end %>
