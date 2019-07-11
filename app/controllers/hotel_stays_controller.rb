@@ -4,9 +4,9 @@ class HotelStaysController < ApplicationController
     if @hotel_stay.valid?
       @hotel_stay.save
     else
-      flash[:errors] = @hotel_stay.errors
-      redirect_to vacation_path(@hotel_stay.vacation)
+      flash[:errors] = @hotel_stay.errors.full_messages
     end
+    redirect_to vacation_path(@hotel_stay.vacation)
   end
 
   def destroy
