@@ -1,4 +1,17 @@
 <h1><%= "#{@vacation.name} starting on #{@vacation.start_date.strftime('%m/%d/%Y')}"%></h1>
+<% if flash[:errors].present? %>
+  <h2>
+    <%= pluralize(flash[:errors].count, "error") %>
+    prohibited this hotel stay from being booked:
+  </h2>
+  <ul>
+    <% flash[:errors].each do |message|%>
+      <li>
+        <%= message %>
+      </li>
+    <% end%>
+  </ul>
+<% end %>
 <%= render "show-helper" %>
 <br>
 <div class="container">
