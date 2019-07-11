@@ -1,22 +1,31 @@
 <%= render "layouts/nav-bar" %>
 
 <% if !@searched_flights.empty? %>
-  <h3>Showing flights from <%= @searched_flights[0].origin.name%> to <%= @searched_flights[0].destination.name %>
-  </h3>
-  <ol>
-    <% @searched_flights.each do |flight| %>
-      <li><br>
-        <ul>
-          <li>Airline: <%= flight.airline %></li>
-          <li>Departure Date: <%= flight.start_time.strftime("%m/%d/%Y") %></li>
-          <li>Departure Time: <%= flight.start_time.strftime("%I:%M%p") %></li>
-          <li>Landing Date: <%= flight.end_time.strftime("%m/%d/%Y") %></li>
-          <li>Landing Time: <%= flight.end_time.strftime("%I:%M%p") %></li>
-          <%= button_to "Add this flight", controller: "vacation_flights", action: "create", params: {vacation_flight: { flight_id: flight.id, vacation_id: @vacation.id }} %>
-        </ul>
-      </li>
-    <% end %>
-  </ol>
+  <br>
+  <h1 style="text-align: center">Showing flights from <%= @searched_flights[0].origin.name%> to <%= @searched_flights[0].destination.name %>
+  </h1>
+  <div class="container">
+    <div class = "row">
+      <div class = "col-sm"> <%= " " %></div>
+      <div class="col-sm">
+        <% @searched_flights.each_with_index do |flight,i| %>
+          <div class="card border-0 shadow my-5">
+            <div class='card-body p-5'>
+              <h2 class = "col-heading"><%= "Flight ##{i+1}" %></h2>
+              <li>Airline: <%= flight.airline %></li>
+              <li>Departure Date: <%= flight.start_time.strftime("%m/%d/%Y") %></li>
+              <li>Departure Time: <%= flight.start_time.strftime("%I:%M%p") %></li>
+              <li>Landing Date: <%= flight.end_time.strftime("%m/%d/%Y") %></li>
+              <li>Landing Time: <%= flight.end_time.strftime("%I:%M%p") %></li>
+              <br>
+              <%= button_to "Add this flight", {action: "create", controller: "vacation_flights"}, { class: "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2", params: {vacation_flight: { flight_id: flight.id, vacation_id: @vacation.id}}}%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class = "col-sm"><%= " " %></div>
+    </div>
+  </div>
 <% else%>
   <h2>No flights matched your search.</h2>
   <h3>Remember the search will not return flights that overlap with hotel stays or do not fit in your vacation.</h3>
