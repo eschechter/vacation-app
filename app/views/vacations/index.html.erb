@@ -1,8 +1,28 @@
-<ol>
-  <% @vacations.each do |vac| %>
-    <li>
-      <%= link_to "#{vac.name} starting on #{vac.start_date.strftime('%m/%d/%Y')}", vacation_path(vac)%>
-    </li>
-  <% end %>
-  <%= link_to "Make a new vacation!", new_vacation_path %>
-</ol>
+<%= stylesheet_link_tag "vacation_index" %>
+<%= stylesheet_link_tag "application" %>
+<%= stylesheet_link_tag "bootstrap-grid.min" %>
+<%= stylesheet_link_tag "bootstrap.min" %>
+
+
+
+<body class="d-flex flex-column">
+  <div id="page-content">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-md-7">
+          <h1 class="font-weight-light mt-4 text-white">My Vacations</h1>
+            <div class="p-3 mb-2 bg-white text-dark">
+              <% @vacations.each do |vac| %>
+                <li>
+                  <%= link_to "#{vac.name} starting on #{vac.start_date.strftime('%m/%d/%Y')}", vacation_path(vac)%>
+                </li>
+              <% end %>
+            </div>
+            <div class="p-3 mb-2">
+            <%= link_to "Make a new vacation!", new_vacation_path, class: "p-3 mb-2 bg-secondary text-white" %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
