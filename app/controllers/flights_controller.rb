@@ -11,10 +11,16 @@ class FlightsController < ApplicationController
 
   def search
     @vacation = Vacation.find(params[:id])
-    start = DateTime.parse(params[:flight][:start_time])
-    flights = Flight.search(params[:flight][:origin_id], params[:flight][:destination_id], start)
-    @searched_flights = flights.select do |flight|
-      flight.can_be_added_to_vacation?(@vacation)
+    begin
+      start = DateTime.parse(params[:flight][:start_time])
+    rescue ArgumentError
+      flash[:errors] = ["Please enter a valid date for your flight."]
+      redirect_to vacation_path(@vacation)
+    else
+      flights = Flight.search(params[:flight][:origin_id], params[:flight][:destination_id], start)
+      @searched_flights = flights.select do |flight|
+        flight.can_be_added_to_vacation?(@vacation)
+      end
     end
   end
 
