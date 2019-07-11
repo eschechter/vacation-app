@@ -3,15 +3,18 @@ class HotelStay < ApplicationRecord
   belongs_to :vacation
 
   validates :check_in_time, :check_out_time, presence: true
+  validate :stay_end_must_be_after_stay_start
+  validate :stay_contained_in_vacation
+  validate :stay_must_be_in_current_city
 
-  def hotel_contained_in_vacation
-    if check_in_time.to_date < vacation.start_date || check_out_time.to_date > vacation.end_date
+  def stay_contained_in_vacation
+    if check_in_time.to_date < vacation.start_date
       errors.add(:hotel, "must fit in the vacation's dates.")
     end
   end
 
-  def hotel_contained_in_vacation?
-    check_in_time.to_date >= vacation.start_date && check_out_time.to_date <= vacation.end_date
+  def stay_contained_in_vacation?
+    check_in_time.to_date >= vacation.start_date
   end
 
   def stay_end_must_be_after_stay_start
