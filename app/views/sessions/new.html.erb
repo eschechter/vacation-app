@@ -1,6 +1,8 @@
 <%= stylesheet_link_tag "bootstrap.min" %>
 <%= stylesheet_link_tag "login" %>
 
+<%= render "layouts/nav-bar" %>
+
 <div class="container-fluid">
   <div class="row no-gutter">
     <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
@@ -12,7 +14,7 @@
               <h1 class="login-heading mb-4">Log in to Take Off!</h1>
               <%= form_tag "/sessions" do %>
                 <div class="form-label-group">
-                  <%= text_field_tag :email %>
+                  <%= text_field_tag :email%>
                   <label>Email address</label>
                 </div>
 

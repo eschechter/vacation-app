@@ -1,3 +1,12 @@
-<h1><%= "Welcome, #{@user.name}!" %></h1>
-<h2><%= "Your email is #{@user.email}" %></h2>
-<%= button_to "Logout", logout_path, method: :delete %>
+<%= render "layouts/nav-bar" %>
+
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5">
+      <h1 class="font-weight-light"><%= "Welcome, #{@user.name}!" %></h1>
+      <p class="lead"><%= "Your email is #{@user.email}" %></p>
+      <p><%= button_to "Logout", logout_path, method: :delete %></p>
+      <div style="height: 150px"></div>
+    </div>
+  </div>
+</div>
