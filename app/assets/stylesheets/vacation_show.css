@@ -12,8 +12,11 @@ h1 {
 
 .col-sm {
     border: solid 2px black;
+    background:white;
 }
+
 .button {
+    background: none;
     text-align: center;
     border: none
 }

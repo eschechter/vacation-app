@@ -10,7 +10,6 @@ class FlightsController < ApplicationController
   end
 
   def search
-    byebug
     @vacation = Vacation.find(params[:id])
     start = DateTime.parse(params[:flight][:start_time])
     flights = Flight.search(params[:flight][:origin_id], params[:flight][:destination_id], start)
