@@ -1,10 +1,12 @@
-<%= form_tag "/sessions" do %>
-  <%= label_tag "Email" %>
-  <%= text_field_tag :email %>
-  <%= label_tag "Password" %>
-  <%= password_field_tag :password %>
-  <%= submit_tag "Login"%>
-<% end%>
+<%# form_tag "/sessions" do %>
+  <%# label_tag "Email" %>
+  <%# text_field_tag :email %>
+  <%# label_tag "Password" %>
+  <%# password_field_tag :password %>
+  <%# submit_tag "Login"%>
+<%# end%>
+<%= stylesheet_link_tag "bootstrap.min" %>
+<%= stylesheet_link_tag "login" %>
 
 <div class="container-fluid">
   <div class="row no-gutter">
@@ -15,25 +17,18 @@
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
               <h3 class="login-heading mb-4">Log in to Take Off!</h3>
-              <form>
+              <%= form_tag "/sessions" do %>
                 <div class="form-label-group">
-                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                  <label for="inputEmail">Email address</label>
+                  <%= text_field_tag :email %>
+                  <label>Email address</label>
                 </div>
 
                 <div class="form-label-group">
-                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                  <label for="inputPassword">Password</label>
+                  <%= password_field_tag :password %>
+                  <label>Password</label>
                 </div>
-
-                <div class="custom-control custom-checkbox mb-3">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1">
-                  <label class="custom-control-label" for="customCheck1">Remember password</label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
-                <div class="text-center">
-                  <a class="small" href="#">Forgot password?</a></div>
-              </form>
+                <%= submit_tag 'Login', class: "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" %>
+              <% end %>
             </div>
           </div>
         </div>

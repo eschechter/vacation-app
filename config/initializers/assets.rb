@@ -11,6 +11,7 @@ Rails.application.config.assets.precompile += %w( vacation_show.css )
 Rails.application.config.assets.precompile += %w( login_show.css )
 Rails.application.config.assets.precompile += %w( bootstrap-grid.min.css )
 Rails.application.config.assets.precompile += %w( bootstrap.min.css )
+Rails.application.config.assets.precompile += %w( login.css )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
