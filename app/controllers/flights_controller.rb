@@ -13,7 +13,6 @@ class FlightsController < ApplicationController
     @vacation = Vacation.find(params[:id])
     begin
       start = Date.parse(params[:flight][:start_time])
-      byebug
     rescue ArgumentError
       flash[:errors] = ["Please enter a valid date for your flight."]
       redirect_to vacation_path(@vacation)
