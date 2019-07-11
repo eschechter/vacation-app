@@ -1,10 +1,3 @@
-<%# form_tag "/sessions" do %>
-  <%# label_tag "Email" %>
-  <%# text_field_tag :email %>
-  <%# label_tag "Password" %>
-  <%# password_field_tag :password %>
-  <%# submit_tag "Login"%>
-<%# end%>
 <%= stylesheet_link_tag "bootstrap.min" %>
 <%= stylesheet_link_tag "login" %>
 
@@ -27,8 +20,9 @@
                   <%= password_field_tag :password %>
                   <label>Password</label>
                 </div>
-                <%= submit_tag 'Login', class: "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" %>
+                <%= submit_tag 'Login', class: "btn btn-sm btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" %>
               <% end %>
+              <%= button_to('Sign Up', signup_path, :class => "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2", :method => "get") %>
             </div>
           </div>
         </div>
