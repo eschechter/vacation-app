@@ -8,10 +8,8 @@
   <div class= "row">
     <% if @most_recent_flight %>
       <div class="col-sm">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title">Your current flights</h2>
-              <ol class="card-text">
+            <h2 class='col-heading'>Your current flights</h2>
+              <ol>
                 <% @vacation.flights.each do |flight| %>
                   <li>
                     <ul>
@@ -25,8 +23,6 @@
                   </li>
                 <% end %>
               </ol>
-          </div>
-        </div>
       </div>
       <div class="col-1"></div>
     <% end %>
