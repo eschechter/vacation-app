@@ -1,9 +1,30 @@
-<%= form_for @user do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %> <br>
-  <%= f.label :email %>
-  <%= f.email_field :email %> <br>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.submit "Signup" %>
-<% end %>
+<%= stylesheet_link_tag "login_show" %>
+<%= stylesheet_link_tag "application" %>
+<%= stylesheet_link_tag "bootstrap-grid.min" %>
+<%= stylesheet_link_tag "bootstrap.min" %>
+
+<div class="p-3 mb-2 bg-primary text-white"><h1>Sign Up for Take Off!</h1></div>
+<div class="login">
+  <%= form_for @user do |f| %>
+      <div class='form-group row'>
+        <label class="col-sm-1 col-form-label">Name:</label>
+        <div class="col-4">
+          <%= f.text_field :name, class: 'form-control' %>
+        </div> <br>
+      </div>
+      <div class='form-group row'>
+      <label class="col-sm-1 col-form-label">Email:</label>
+          <div class="col-sm-4">
+            <%= f.email_field :email, class: 'form-control' %>
+          </div> <br>
+      </div>
+      <div class='form-group row'>
+      <label class="col-sm-1 col-form-label">Password:</label>
+          <div class="col-sm-4">
+            <%= f.password_field :password, class: 'form-control' %> 
+          </div> <br>
+      </div>
+      <%= f.submit "Sign Up", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
