@@ -14,14 +14,14 @@
         <% if !@vacation.hotels.empty? %>
           <%= button_to "Delete the most recent hotel", @vacation.hotel_stays.max_by(&:check_out_time), {method: :delete, id: "delete-hotel"} %>
           <br>
-           <br>
-           <br>
+          <br>
+          <br>
         <% end %>
       </div>
       <br>
       <nav class = "navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
         <a class= "navbar-brand">Search for your next flight!</a>
-        <%= form_tag "/flights/search/#{@vacation.id}", {method: "get", class: "form-inline"} do %>
+        <%= form_tag "/flights/search/#{@vacation.id}", {class: "form-inline", method: "get"} do %>
           <label class = "my-1 mr-2">Origin:</label>
           <% if !@vacation.cur_city.nil? %>
             <strong><%= @vacation.cur_city.name %></strong>
@@ -33,7 +33,7 @@
           <label class = "my-1 mr-2"> Destination:</label>
           <%= collection_select :flight, :destination_id, @cities, :id, :name, {prompt: "Please select destination"}, {class: "form-control mr-sm-2"} %>
           <label class = "my-1 mr-2" >Approx. Departure:</label>
-          <%= datetime_field_tag "flight", "start_time", class: "form-control mr-sm-2 datetime-local"%>
+          <%= datetime_field_tag "flight[start_time]", {class: "form-control mr-sm-2 datetime-local"}%>
           <%= submit_tag 'Search', class: "btn btn-primary" %>
         <% end %>
       </nav>
@@ -41,8 +41,8 @@
       <div class="col-sm button">
         <%= button_to "Delete the most recent flight", @most_recent_flight, {method: :delete, id: "delete-flight"} %>
         <br>
-         <br>
-         <br>
+        <br>
+        <br>
       </div>
       <div class="col-1 button">
         <%= " " %>

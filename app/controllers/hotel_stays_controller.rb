@@ -1,7 +1,12 @@
 class HotelStaysController < ApplicationController
   def create
-    @hotel_stay = HotelStay.create(hotel_stay_params)
-    redirect_to vacation_path(@hotel_stay.vacation)
+    @hotel_stay = HotelStay.new(hotel_stay_params)
+    if @hotel_stay.valid?
+      @hotel_stay.save
+    else
+      flash[:errors] = @hotel_stay.errors
+      redirect_to vacation_path(@hotel_stay.vacation)
+    end
   end
 
   def destroy
