@@ -46,7 +46,7 @@ class Flight < ApplicationRecord
   end
 
   def self.search(orig_id, dest_id, start)
-    start_range = start - 6.hours..start + 6.hours
+    start_range = start.to_datetime..(start + 1).to_datetime
     Flight.where(origin_id: orig_id, destination_id: dest_id, start_time: start_range)
   end
 end

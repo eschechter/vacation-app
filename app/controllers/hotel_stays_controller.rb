@@ -1,6 +1,8 @@
 class HotelStaysController < ApplicationController
   def create
     @hotel_stay = HotelStay.new(hotel_stay_params)
+    @hotel_stay.check_in_time += 9.hours
+    @hotel_stay.check_out_time += 18.hours
     if @hotel_stay.valid?
       @hotel_stay.save
     else
