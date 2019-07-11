@@ -1,12 +1,20 @@
 class HotelStaysController < ApplicationController
   def create
     @hotel_stay = HotelStay.new(hotel_stay_params)
-    @hotel_stay.check_in_time += 9.hours
-    @hotel_stay.check_out_time += 18.hours
+    begin
+      @hotel_stay.check_in_time += 9.hours
+      @hotel_stay.check_out_time += 18.hours
+    rescue NoMethodError
+      flash[:errors] = ["Enter valid dates for check in and check out."]
+    end
     if @hotel_stay.valid?
       @hotel_stay.save
     else
-      flash[:errors] = @hotel_stay.errors.full_messages
+      if flash[:errors]
+        flash[:errors] += @hotel_stay.errors.full_messages
+      else
+        flash[:errors] = @hotel_stay.errors.full_messages
+      end
     end
     redirect_to vacation_path(@hotel_stay.vacation)
   end
