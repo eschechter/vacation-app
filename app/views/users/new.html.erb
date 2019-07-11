@@ -3,28 +3,42 @@
 <%= stylesheet_link_tag "bootstrap-grid.min" %>
 <%= stylesheet_link_tag "bootstrap.min" %>
 
-<div class="p-3 mb-2 bg-primary text-white"><h1>Sign Up for Take Off!</h1></div>
-<div class="login">
-  <%= form_for @user do |f| %>
-      <div class='form-group row'>
-        <label class="col-sm-1 col-form-label">Name:</label>
-        <div class="col-4">
-          <%= f.text_field :name, class: 'form-control' %>
-        </div> <br>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row border-0 shadow my-5">
+          <div class="card-img-left d-none d-md-flex">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign Up!</h5>
+            <%= form_for @user do |f| %>
+              <div class="form-label-group">
+                <%= f.text_field :name, class: 'form-control' %>
+                <label>Username</label>
+              </div>
+
+              <div class="form-label-group">
+                <%= f.email_field :email, class: 'form-control' %>
+                <label>Email address</label>
+              </div>
+              
+              <hr>
+
+              <div class="form-label-group">
+                <%= f.password_field :password, class: 'form-control' %>
+                <label>Password</label>
+              </div>
+        
+              <%= f.submit "Sign Up", class: "btn btn-lg btn-primary btn-block text-uppercase" %>
+              <hr class="my-4">
+            <% end %>
+          </div>
+        </div>
       </div>
-      <div class='form-group row'>
-      <label class="col-sm-1 col-form-label">Email:</label>
-          <div class="col-sm-4">
-            <%= f.email_field :email, class: 'form-control' %>
-          </div> <br>
-      </div>
-      <div class='form-group row'>
-      <label class="col-sm-1 col-form-label">Password:</label>
-          <div class="col-sm-4">
-            <%= f.password_field :password, class: 'form-control' %> 
-          </div> <br>
-      </div>
-      <%= f.submit "Sign Up", class: "btn btn-primary" %>
-  <% end %>
-</div>
+    </div>
+  </div>
+</body>
+
+
 
