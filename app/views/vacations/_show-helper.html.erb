@@ -8,21 +8,25 @@
   <div class= "row">
     <% if @most_recent_flight %>
       <div class="col-sm">
-        <h2 class="col-heading">Your current flights</h2>
-        <ol>
-          <% @vacation.flights.each do |flight| %>
-            <li>
-              <ul>
-                <li>Airline: <%= flight.airline %></li>
-                <li>Origin City: <%= flight.origin.name %></li>
-                <li>Takeoff Time: <%= flight.start_time.strftime("%m/%d/%Y") %>, <%= flight.start_time.strftime("%I:%M%p")%> </li>
-                <li>Destination City: <%= flight.destination.name %></li>
-                <li>Landing Time: <%= flight.end_time.strftime("%m/%d/%Y") %>, <%= flight.end_time.strftime("%I:%M%p") %></li>
-              </ul>
-              <br>
-            </li>
-          <% end %>
-        </ol>
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Your current flights</h2>
+              <ol class="card-text">
+                <% @vacation.flights.each do |flight| %>
+                  <li>
+                    <ul>
+                      <li>Airline: <%= flight.airline %></li>
+                      <li>Origin City: <%= flight.origin.name %></li>
+                      <li>Takeoff Time: <%= flight.start_time.strftime("%m/%d/%Y") %>, <%= flight.start_time.strftime("%I:%M%p")%> </li>
+                      <li>Destination City: <%= flight.destination.name %></li>
+                      <li>Landing Time: <%= flight.end_time.strftime("%m/%d/%Y") %>, <%= flight.end_time.strftime("%I:%M%p") %></li>
+                    </ul>
+                    <br>
+                  </li>
+                <% end %>
+              </ol>
+          </div>
+        </div>
       </div>
       <div class="col-1"></div>
     <% end %>
