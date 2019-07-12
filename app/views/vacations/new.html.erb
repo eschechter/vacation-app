@@ -26,7 +26,7 @@
           </div>
           <div class="form-label-group">
             <%= f.date_field :start_date, class: 'form-control' %>
-            <label>Start Date</label>
+            <%= f.label 'Start Date'%>
           </div>
           <%= hidden_field_tag "vacation[user_id]", @user_id %>
           <%= f.submit "Make the vacay!", class: "btn btn-lg btn-primary btn-block text-uppercase" %>
