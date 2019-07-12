@@ -2,8 +2,21 @@
 <%= stylesheet_link_tag "application" %>
 <%= stylesheet_link_tag "bootstrap-grid.min" %>
 <%= stylesheet_link_tag "bootstrap.min" %>
-
 <%= render "layouts/nav-bar" %>
+<% if flash[:errors].present? %>
+  <div id='error'>
+    <div class="card mx-auto border-0 shadow my-5" id="innererror" style="width: 18rem;">
+      <div class="card-header">
+        <strong><%= pluralize(flash[:errors].count, "error") %> prevented this login from being valid:</strong>
+      </div>
+      <ol class="list-group list-group-flush">
+        <% flash[:errors].each do |message|%>
+          <li class="list-group-item"><%= message %></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+<% end %>
 <body>
   <div class="container">
     <div class="row">
@@ -26,7 +39,7 @@
               <hr class="my-4">
             <% end %>
             <h5 class="card-title text-center">Don't have an account?</h5>
-              <%= button_to('Sign Up', signup_path, :class => "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2", :method => "get") %>
+            <%= button_to('Sign Up', signup_path, :class => "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2", :method => "get") %>
           </div>
         </div>
       </div>

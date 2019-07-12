@@ -6,8 +6,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    session[:user_id] = User.create(user_params).id
-    redirect_to vacations_path
+    user = User.new(user_params)
+    if user.valid?
+      user.save
+      session[:user_id] = user.id
+      redirect_to vacations_path(user)
+    else
+      @user_with_errors = user
+      @user = User.new
+      render :new
+    end
   end
 
   def homepage

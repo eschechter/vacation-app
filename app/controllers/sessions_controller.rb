@@ -9,6 +9,8 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to vacations_path
     else
+      flash[:errors] = ["Please enter a valid email and password."]
+
       redirect_to login_path
     end
   end
