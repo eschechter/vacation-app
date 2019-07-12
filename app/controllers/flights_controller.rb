@@ -1,12 +1,8 @@
 class FlightsController < ApplicationController
-  # before_action :authorized, only: [:search_form, :search]
+  # before_action :authorized, only: [:search]
 
   def show
     @flight = Flight.find(params[:id])
-  end
-
-  def search_form
-    @cities = City.all
   end
 
   def search

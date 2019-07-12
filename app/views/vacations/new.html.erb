@@ -25,7 +25,7 @@
             <label>Vacation Name</label>
           </div>
           <div class="form-label-group">
-            <%= f.date_field :start_date, class: 'form-control' %>
+            <%= f.date_field :start_date, value: Date.today, class: 'form-control' %>
             <%= f.label 'Start Date'%>
           </div>
           <%= hidden_field_tag "vacation[user_id]", @user_id %>

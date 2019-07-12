@@ -50,7 +50,12 @@
           <label class = "my-1 mr-2"> Destination:</label>
           <%= collection_select :flight, :destination_id, @cities, :id, :name, {prompt: "Please select destination"}, {class: "form-control mr-sm-2"} %>
           <label class = "my-1 mr-2" >Departure Date:</label>
-          <%= date_field_tag("flight[start_time]", nil, {class: "form-control mr-sm-2 datetime-local"})%>
+          <% if @vacation.hotels.empty? %>
+            <% default = @vacation.start_date %>
+          <% else %>
+            <% default = @vacation.last_hotel_stay.check_out_time.to_date %>
+          <% end %>
+          <%= date_field_tag("flight[start_time]", nil, {value: default, class: "form-control mr-sm-2 datetime-local"})%>
           <%= submit_tag 'Search', class: "btn btn-primary" %>
         <% end %>
       </nav>
@@ -80,9 +85,9 @@
       <% end%>
       <%= f.collection_select :hotel_id, hotel_list, :id, :name, {prompt: "Pick a hotel"}, {class: "form-control mr-sm-2"} %>
       <label class = "my-1 mr-2">Check in date (10:00 AM):</label>
-      <%= f.date_field :check_in_time, class: "form-control mr-sm-2 datetime-local" %>
+      <%= f.date_field :check_in_time, :value => @vacation.last_flight.end_time.to_date, class: "form-control mr-sm-2 datetime-local" %>
       <label class = "my-1 mr-2">Check out date (06:00 PM):</label>
-      <%= f.date_field :check_out_time, class: "form-control mr-sm-2 datetime-local"%>
+      <%= f.date_field :check_out_time, :value => @vacation.last_flight.end_time.to_date, class: "form-control mr-sm-2 datetime-local"%>
       <%= f.hidden_field :vacation_id, value: @vacation.id %>
       <%= f.submit "Book a hotel", class: "btn btn-primary"%>
     <% end %>
