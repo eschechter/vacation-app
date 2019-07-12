@@ -18,8 +18,12 @@ class FlightsController < ApplicationController
       redirect_to vacation_path(@vacation)
     else
       flights = Flight.search(params[:flight][:origin_id], params[:flight][:destination_id], start)
-      @searched_flights = flights.select do |flight|
+      unsorted_flights = flights.select do |flight|
         flight.can_be_added_to_vacation?(@vacation)
+      end
+
+      @searched_flights = unsorted_flights.sort_by do |flight|
+        flight.start_time
       end
     end
   end
