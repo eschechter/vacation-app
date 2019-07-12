@@ -1,5 +1,4 @@
 <%= render "layouts/nav-bar" %>
-
 <% if !@searched_flights.empty? %>
   <br>
   <h1 style="text-align: center">Showing flights from <%= @searched_flights[0].origin.name%> to <%= @searched_flights[0].destination.name %>
