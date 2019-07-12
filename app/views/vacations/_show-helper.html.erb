@@ -5,6 +5,12 @@
 
 
 <div class="container">
+  <% if !@vacation.end_date.present? %>
+    <div style='text-align:center'>
+      <% if @vacation.first_origin == @vacation.cur_city && !@vacation.flights.empty? %>
+        <%= button_to 'Finalize trip!', finalize_vacation_path(@vacation), :class => "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" %>
+      <% end %></div>
+  <% end %>
   <div class= "row">
     <% if @most_recent_flight %>
       <div class="col-sm">
