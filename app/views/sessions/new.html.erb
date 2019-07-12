@@ -1,34 +1,35 @@
+<%= stylesheet_link_tag "login_show" %>
+<%= stylesheet_link_tag "application" %>
+<%= stylesheet_link_tag "bootstrap-grid.min" %>
 <%= stylesheet_link_tag "bootstrap.min" %>
-<%= stylesheet_link_tag "login" %>
 
 <%= render "layouts/nav-bar" %>
-
-<div class="container-fluid">
-  <div class="row no-gutter">
-    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
-    <div class="col-md-8 col-lg-6">
-      <div class="login d-flex align-items-center py-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-9 col-lg-8 mx-auto">
-              <h1 class="login-heading mb-4">Log in to Take Off!</h1>
-              <%= form_tag "/sessions" do %>
-                <div class="form-label-group">
-                  <%= text_field_tag :email%>
-                  <label>Email address</label>
-                </div>
-
-                <div class="form-label-group">
-                  <%= password_field_tag :password %>
-                  <label>Password</label>
-                </div>
-                <%= submit_tag 'Login', class: "btn btn-sm btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" %>
-              <% end %>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row border-0 shadow my-5">
+          <div class="card-img-left d-none d-md-flex">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">Login!</h5>
+            <%= form_tag "/sessions" do %>
+              <div class="form-label-group">
+                <%= text_field_tag("email", nil, {class: "form-control"})%>
+                <label>Email address</label>
+              </div>
+              <div class="form-label-group">
+                <%= password_field_tag("password", nil, {class: "form-control"})%>
+                <label>Password</label>
+              </div>
+              <%= submit_tag 'Login', class: "btn btn-sm btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" %>
+              <hr class="my-4">
+            <% end %>
+            <h5 class="card-title text-center">Don't have an account?</h5>
               <%= button_to('Sign Up', signup_path, :class => "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2", :method => "get") %>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</body>

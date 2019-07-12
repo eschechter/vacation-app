@@ -27,7 +27,16 @@
     </div>
   </div>
 <% else%>
-  <h2>No flights matched your search.</h2>
-  <h3>Remember the search will not return flights that overlap with hotel stays or do not fit in your vacation.</h3>
-  <%= link_to "Go back to your vacation's page.", vacation_path(@vacation) %>
+  <div class="container">
+    <div class="card border-0 shadow my-5">
+      <div class="card-body p-5">
+        <h1 class="font-weight-light">No flights matched your search.</h1>
+        <p class="lead" style="text-align:center">Remember the search will not return flights that overlap with hotel stays or do not fit into your vacation.</p>
+        <p style='text-align:center'><%= link_to "Go back to your vacation's page.", vacation_path(@vacation) %></p>
+        <div style="height: 100px"></div>
+      </div>
+    </div>
+  </div>
 <% end%>
+
+
