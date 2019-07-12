@@ -4,9 +4,11 @@
   <div class="card border-0 shadow my-5">
     <div class="card-body p-5">
       <h1 class="font-weight-light"><%= "Welcome, #{@user.name}!" %></h1>
-      <p class="lead"><%= "Your email is #{@user.email}" %></p>
-      <p><%= button_to "Logout", logout_path, method: :delete %></p>
-      <div style="height: 150px"></div>
+      <p class="lead" style="text-align:center"><%= "Your email is #{@user.email}" %></p>
+      <br>
+      <br>
+      <p><%= button_to("Logout", logout_path, :class => "btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-3", method: :delete) %></p>
+      <div style="height: 100px"></div>
     </div>
   </div>
 </div>
