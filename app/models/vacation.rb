@@ -5,6 +5,8 @@ class Vacation < ApplicationRecord
   has_many :vacation_flights
   has_many :flights, through: :vacation_flights
 
+  validates :name, :start_date, :user, presence: true
+
   def last_vacation_flight
     vacation_flights.max_by do |vac_flight|
       vac_flight.flight.end_time

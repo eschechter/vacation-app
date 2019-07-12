@@ -25,8 +25,13 @@ class VacationsController < ApplicationController
   end
 
   def create
-    @vac = Vacation.create(vacation_params)
-    redirect_to vacation_path(@vac)
+    @vacation = Vacation.new(vacation_params)
+    if @vacation.valid?
+      @vacation.save
+      redirect_to vacation_path(@vacation)
+    else
+      render :new
+    end
   end
 
   def finalize
