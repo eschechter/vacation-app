@@ -9,7 +9,7 @@ class VacationsController < ApplicationController
     if user.id != Vacation.find(params[:id]).user_id
       redirect_to login_path
     end
-    @cities = City.all
+    @cities = City.all.sort_by(&:name)
     @vacation = Vacation.find(params[:id])
     @most_recent_flight = @vacation.last_vacation_flight
     if @vacation.end_date
