@@ -2,9 +2,22 @@
 <%= stylesheet_link_tag "application" %>
 <%= stylesheet_link_tag "bootstrap-grid.min" %>
 <%= stylesheet_link_tag "bootstrap.min" %>
-
-<%= render "layouts/nav-bar" %>
 <body>
+  <%= render "layouts/nav-bar" %>
+  <% if @user_with_errors.present? %>
+    <div id='error'>
+      <div class="card mx-auto border-0 shadow my-5" id="innererror" style="width: 18rem;">
+        <div class="card-header">
+          <strong><%= pluralize(@user_with_errors.errors.count, "error") %> made this attempt to sign up unsuccessful:</strong>
+        </div>
+        <ol class="list-group list-group-flush">
+          <% @user_with_errors.errors.full_messages.each do |message|%>
+            <li class="list-group-item"><%= message %></li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+  <% end %>
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto">
@@ -16,21 +29,17 @@
             <%= form_for @user do |f| %>
               <div class="form-label-group">
                 <%= f.text_field :name, class: 'form-control' %>
-                <label>Username</label>
+                <label>Name</label>
               </div>
-
               <div class="form-label-group">
                 <%= f.email_field :email, class: 'form-control' %>
                 <label>Email address</label>
               </div>
-              
               <hr>
-
               <div class="form-label-group">
                 <%= f.password_field :password, class: 'form-control' %>
                 <label>Password</label>
               </div>
-        
               <%= f.submit "Sign Up", class: "btn btn-lg btn-primary btn-block text-uppercase" %>
               <hr class="my-4">
             <% end %>
@@ -40,6 +49,3 @@
     </div>
   </div>
 </body>
-
-
-

@@ -30,6 +30,8 @@ class VacationsController < ApplicationController
       @vacation.save
       redirect_to vacation_path(@vacation)
     else
+      @vacation_with_errors = @vacation
+      @vacation = Vacation.new
       render :new
     end
   end

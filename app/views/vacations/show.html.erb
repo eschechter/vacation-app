@@ -1,24 +1,22 @@
 <%= render "layouts/nav-bar" %>
 <br>
 <h1><%= "#{@vacation.name} starting on #{@vacation.start_date.strftime('%m/%d/%Y')}"%></h1>
-  <h4 style='text-align:center'>Search for flights or hotels below!</h4>
-    <% if flash[:errors].present? %>
-      <div id='error'>
-        <div class="card mx-auto border-0 shadow my-5"" id="innererror" style="width: 18rem;">
-          <div class="card-header">
-            <strong><%= pluralize(flash[:errors].count, "error") %> prohibited this reservation from being booked:</strong>
-          </div>
-          <ol class="list-group list-group-flush">
-            <% flash[:errors].each do |message|%>
-              <li class="list-group-item"><%= message %></li>
-            <% end %>
-          </ol>
-        </div>
+<h4 style='text-align:center'>Search for flights or hotels below!</h4>
+<% if flash[:errors].present? %>
+  <div id='error'>
+    <div class="card mx-auto border-0 shadow my-5" id="innererror" style="width: 18rem;">
+      <div class="card-header">
+        <strong><%= pluralize(flash[:errors].count, "error") %> prohibited this reservation from being booked:</strong>
       </div>
-    <% end %>
+      <ol class="list-group list-group-flush">
+        <% flash[:errors].each do |message|%>
+          <li class="list-group-item"><%= message %></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+<% end %>
 <%= render "show-helper" %>
-
-
 <div class="container">
   <div class="row">
     <% if !@vacation.need_to_book_hotel? %>

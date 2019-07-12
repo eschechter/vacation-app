@@ -1,5 +1,18 @@
 <%= render "layouts/nav-bar" %>
-
+<% if @vacation_with_errors.present? %>
+  <div id='error'>
+    <div class="card mx-auto border-0 shadow my-5" id="innererror" style="width: 18rem;">
+      <div class="card-header">
+        <strong><%= pluralize(@vacation_with_errors.errors.count, "error") %> prohibited this vacation from being created:</strong>
+      </div>
+      <ol class="list-group list-group-flush">
+        <% @vacation_with_errors.errors.full_messages.each do |message|%>
+          <li class="list-group-item"><%= message %></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+<% end %>
 <div class="container">
   <div class="card border-0 shadow my-5">
     <div class="card-body p-5">
@@ -23,4 +36,3 @@
     </div>
   </div>
 </div>
-
