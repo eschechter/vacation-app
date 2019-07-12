@@ -50,7 +50,12 @@
           <label class = "my-1 mr-2"> Destination:</label>
           <%= collection_select :flight, :destination_id, @cities, :id, :name, {prompt: "Please select destination"}, {class: "form-control mr-sm-2"} %>
           <label class = "my-1 mr-2" >Departure Date:</label>
-          <%= date_field_tag("flight[start_time]", nil, {class: "form-control mr-sm-2 datetime-local"})%>
+          <% if @vacation.hotels.empty? %>
+            <% default = @vacation.start_date%>
+          <% else %>
+            <%default= @vacation.last_hotel_stay.check_out_time.to_date  %>
+          <% end %>
+          <%= date_field_tag("flight[start_time]", nil, {value: default, class: "form-control mr-sm-2 datetime-local"})%>
           <%= submit_tag 'Search', class: "btn btn-primary" %>
         <% end %>
       </nav>
